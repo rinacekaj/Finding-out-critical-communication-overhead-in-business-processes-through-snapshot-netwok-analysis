@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<style>
+		#time-range
+	p {  font-family:"Helvetica", sans-serif;
+	    font-size:14px;
+	    color:#333;
+	}
+	.ui-slider-horizontal {
+	    height: 8px;
+	    background: #D7D7D7;
+	    border: 1px solid #BABABA;
+	    box-shadow: 0 1px 0 #FFF, 0 1px 0 #CFCFCF inset;
+	    clear: both;
+	    margin: 8px 0;
+	    -webkit-border-radius: 6px;
+	    -moz-border-radius: 6px;
+	    -ms-border-radius: 6px;
+	    -o-border-radius: 6px;
+	    border-radius: 6px;
+	}
+	.ui-slider {
+	    position: relative;
+	    text-align: left;
+	}
+	.ui-slider-horizontal .ui-slider-range {
+	    top: -1px;
+	    height: 100%;
+	}
+	.ui-slider .ui-slider-range {
+	    position: absolute;
+	    z-index: 1;
+	    height: 8px;
+	    font-size: .7em;
+	    display: block;
+	    border: 1px solid #585858;
+	    box-shadow: 0 1px 0 #585858 inset;
+	    -moz-border-radius: 6px;
+	    -webkit-border-radius: 6px;
+	    -khtml-border-radius: 6px;
+	    border-radius: 6px;
+	    background: #585858;
+	    background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgi…pZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+	    background-size: 100%;
+	    background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0%, #585858), color-stop(100%, #585858));
+	    background-image: -webkit-linear-gradient(top, #585858, #585858);
+	    background-image: -moz-linear-gradient(top, #585858, #585858);
+	    background-image: -o-linear-gradient(top, #585858, #585858);
+	    background-image: linear-gradient(top, #585858, #585858);
+	}
+	.ui-slider .ui-slider-handle {
+	    border-radius: 50%;
+	    background: #F9FBFA;
+	    background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgi…pZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+	    background-size: 100%;
+	    background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0%, #C7CED6), color-stop(100%, #F9FBFA));
+	    background-image: -webkit-linear-gradient(top, #C7CED6, #F9FBFA);
+	    background-image: -moz-linear-gradient(top, #C7CED6, #F9FBFA);
+	    background-image: -o-linear-gradient(top, #C7CED6, #F9FBFA);
+	    background-image: linear-gradient(top, #C7CED6, #F9FBFA);
+	    width: 22px;
+	    height: 22px;
+	    -webkit-box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.6), 0 -1px 0 1px rgba(0, 0, 0, 0.15) inset, 0 1px 0 1px rgba(255, 255, 255, 0.9) inset;
+	    -moz-box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.6), 0 -1px 0 1px rgba(0, 0, 0, 0.15) inset, 0 1px 0 1px rgba(255, 255, 255, 0.9) inset;
+	    box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.6), 0 -1px 0 1px rgba(0, 0, 0, 0.15) inset, 0 1px 0 1px rgba(255, 255, 255, 0.9) inset;
+	    -webkit-transition: box-shadow .3s;
+	    -moz-transition: box-shadow .3s;
+	    -o-transition: box-shadow .3s;
+	    transition: box-shadow .3s;
+	}
+	.ui-slider .ui-slider-handle {
+	    position: absolute;
+	    z-index: 2;
+	    width: 22px;
+	    height: 22px;
+	    cursor: default;
+	    border: none;
+	    cursor: pointer;
+	}
+	.ui-slider .ui-slider-handle:after {
+	    content:"";
+	    position: absolute;
+	    width: 8px;
+	    height: 8px;
+	    border-radius: 50%;
+	    top: 50%;
+	    margin-top: -4px;
+	    left: 50%;
+	    margin-left: -4px;
+	    background: #585858;
+	    -webkit-box-shadow: 0 1px 1px 1px rgba(22, 73, 163, 0.7) inset, 0 1px 0 0 #FFF;
+	    -moz-box-shadow: 0 1px 1px 1px rgba(22, 73, 163, 0.7) inset, 0 1px 0 0 white;
+	    box-shadow: 0 1px 1px 1px rgba(22, 73, 163, 0.7) inset, 0 1px 0 0 #FFF;
+	}
+	.ui-slider-horizontal .ui-slider-handle {
+	    top: -.5em;
+	    margin-left: -.6em;
+	}
+	.ui-slider a:focus {
+	    outline:none;
+	}
+     .float-container {
+      display: flex; .
+            height: 700px;
+            width: 2000px;
+            margin: auto;
+            width: 70%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px;
+            border: 2px solid #E5E6E8;
+            word-wrap:break-word;
+            overflow-x:scroll;
+    }
+
+	.float-child {
+	flex: 1;
+	    background-size: contain;
+	    height: 600px;
+	    width: 2000;
+	    word-wrap:break-word;
+	}  
+	img {
+	    display: block;
+	    max-width:500px;
+	    max-height:400px;
+	    width: auto;
+	    height: auto;
+	}
+	table {
+	  padding-left: 50px;
+	  padding-top: 10px;
+	  
+	}
+	h1 {
+		font-size: 40px;
+	}
+	h2 {
+		font-size: 27px;
+	}
+
+	th, td {
+	    font-size: 17px;
+	    text-align: left;
+
+
+	}
+	input[type=submit] {
+	  display: inline-block;
+	  padding: 15px 25px;
+	  font-size: 18px;
+	  cursor: pointer;
+	  text-align: center;
+	  text-decoration: none;
+	  outline: none;
+	  color: #fff;
+	  background-color: #585858;
+	  border: none;
+	  border-radius: 3px;
+	  box-shadow: 0 4px #999;
+	}
+	a { color: black; } 
+	</style>
+</head>
+<body>
+<div class="float-container">
+
+    <div class="float-child" id="time-range">
+    	<a href="">Upload another Dataset</a> </p>
+    	<h1>  Network Snapshot Analysis	</h1>
+	    <p>Time Range: <span class="slider-time"></span> - <span class="slider-time2"></span></p>
+	    <form id = "myForm" method = "POST" action="/test">
+	        <div class="sliders_step1">
+	            <div id="slider-range" name = "slider-range" style="height: 10px; width: 500px"></div>
+	            <input type = "submit" value="submit" />
+	        </div>
+	        <p id="wrong"></p>
+			<img id='im1' src="">
+
+	</div>
+	 <div class="float-child">
+    	<h2 id="title"  style="padding-top: 80px; padding-left: 150px"></h2>
+    	<table>
+	         <tr>
+			    <th> <p id="m1" ></p></th>
+			    <td> <p id="nrOfEdges"></p>
+			    <th><p id="m2"> </p></th>
+			    <td><p id="nrOfNodes"></p></td>
+			 </tr>
+			 <tr>
+			    <th><p id="m3"> </p></th>
+			    <td><p id="density"></p></td>
+			    <th><p id="m4"> </p></th>
+			    <td><p id="transitivity"></p></td>
+			 </tr>
+			  <tr>
+			    <th><p id="m6"> </p></th>
+			    <td><p id="minbtwCentralityK"></p></td>
+			    <td><p id="minbtwCentralityV"></p></td>
+			   </tr>
+			    <th><p id="m7"> </p></th>
+			    <td><p id="maxbtwCentralityK"></p></td>
+			    <td><p id="maxbtwCentralityV"></p></td>
+			 </tr>
+			 <tr>
+			    <th><p id="m9"> </p></th>
+			    <td><p id="minclsCentralityK"></p></td>
+			    <td><p id="minclsCentralityV"></p></td>
+			 </tr>
+			 <tr>
+			    <th><p id="m10"> </p></th>
+			    <td><p id="maxclsCentralityK"></p></td>
+			    <td><p id="maxclsCentralityV"></p></td>
+			 </tr>
+		</table>
+      </div>  	
+</div>
+
+<script>
+		//start and endDate of the slider
+		var dt_from = "2018/01/01 00:00:00";
+		var dt_to = "2021/01/01 16:37:43";
+
+		$('.slider-time').html(dt_from);
+		$('.slider-time2').html(dt_to);
+		var min_val = Date.parse(dt_from)/1000;
+		var max_val = Date.parse(dt_to)/1000;
+
+		function zeroPad(num, places) {
+		  var zero = places - num.toString().length + 1;
+		  return Array(+(zero > 0 && zero)).join("0") + num;
+		}
+
+		function formatDT(__dt) {
+		    var year = __dt.getFullYear();
+		    var month = zeroPad(__dt.getMonth()+1, 2);
+		    var date = zeroPad(__dt.getDate(), 2);
+		    var hours = zeroPad(__dt.getHours(), 2);
+		    var minutes = zeroPad(__dt.getMinutes(), 2);
+		    var seconds = zeroPad(__dt.getSeconds(), 2);
+		    return year + '-' + month + '-' + date + ' ' + hours + ':' + minutes + ':' + seconds;
+		};
+
+        dt_cur_from = new Date()
+        dt_cur_to = new Date()
+
+		$("#slider-range").slider({
+		    range: true,
+		    min: min_val,
+		    max: max_val,
+		    step: 10,
+		    values: [min_val, max_val],
+		    slide: function (e, ui) {
+		        window.dt_cur_from = new Date(ui.values[0]*1000); 
+		        $('.slider-time').html(formatDT(dt_cur_from));
+
+		        window.dt_cur_to = new Date(ui.values[1]*1000); 
+		        $('.slider-time2').html(formatDT(dt_cur_to));
+		    }
+		});
+
+
+$("document").ready(function(){
+        $("#myForm").submit(function(){
+            var dt_from = dt_cur_from;
+            var dt_to = dt_cur_to
+            console.log(dt_from);
+            console.log(dt_to)
+            event.preventDefault();
+            //define ajax to send request
+            $.ajax({
+                url: "http://localhost:5000/test/",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({"a": dt_from, "b": dt_to}),
+                dataType: "json"
+            }).done(function(data) {
+            	if (data['p']=="No communication network during this time"){
+            		//show the values in the html tags
+            		$('#wrong').text(data['p']).show();
+					$('#nrOfEdges').text("0").show();
+					$('#nrOfNodes').text("0").show();
+
+					$('#density').text("0").show();
+					$('#transitivity').text("0").show();
+
+					$('#minbtwCentralityK').text("0").show();
+					$('#minbtwCentralityV').text("0").show();
+					$('#maxbtwCentralityK').text("0").show();
+					$('#maxbtwCentralityV').text("0").show();
+
+					$('#minclsCentralityK').text("0").show();
+					$('#minclsCentralityV').text("0").show();
+					$('#maxclsCentralityK').text( "0").show();
+					$('#maxclsCentralityV').text("0").show();
+            		$(im1).attr("src", "");
+            	}
+            	else{
+            		//show the values in the html tags
+            	    $('#title').text("Complexity measures").show();
+            		$('#m1').text("Number of Edges:").show();
+					$('#nrOfEdges').text(data['nrOfEdges']).show();
+					$('#m2').text("Number of nodes:").show();
+					$('#nrOfNodes').text(data['nrOfNodes']).show();
+
+					$('#m3').text("Density:").show();
+					$('#density').text(data['density']).show();
+					$('#m4').text("Transitivity:").show();
+					$('#transitivity').text(data['transitivity']).show();
+					$('#m5').text("Betweenness Centrality").show();
+					$('#m8').text("Closeness Centrality").show();
+
+					$('#m6').text("Betweenness Centrality Min:").show();
+					$('#m7').text("Betweenness Centrality Max:").show();
+					$('#minbtwCentralityK').text(data['minbK']).show();
+					$('#minbtwCentralityV').text(data['minbV']).show();
+					$('#maxbtwCentralityK').text(data['maxbK']).show();
+					$('#maxbtwCentralityV').text(data['maxbV']).show();
+					$('#m9').text("Closeness Centrality Min:").show();
+					$('#m10').text("Closeness Centrality Max:").show();
+					$('#minclsCentralityK').text(data['mincK']).show();
+					$('#minclsCentralityV').text(data['mincV']).show();
+					$('#maxclsCentralityK').text(data['maxcK']).show();
+					$('#maxclsCentralityV').text(data['maxcV']).show();
+					newsrc= data['filename'];
+            		$(im1).attr("src", newsrc);
+            		$('#wrong').text("").show();
+
+
+            	}
+
+            });
+    });
+});
+
+
+</script>
+</body>
+</html>

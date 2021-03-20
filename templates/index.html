@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+  <head>
+    <style>
+          .main {
+            background-image: url("static/network.jpg");
+            height: 550px;
+            width: 950px;
+            margin: auto;
+            width: 70%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px;
+            background-size: contain;
+          }
+      .x {
+            margin: auto;
+            width: 70%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px
+
+      }
+      h1   {color: #585858; 
+            text-align: center;
+            font-size: 45px;
+          }
+      p    {color: red;}
+
+            /* Style the submit button */
+      input[type=submit] {
+          font-size: 1.25em;
+          font-weight: 700;
+          color: white;
+          background-color: #585858;
+          cursor: pointer; 
+          padding: 7px 20px; 
+      }
+      input[type=file]{
+          font-size: 1em;
+          font-weight: 700;
+          color: white;
+          background-color: #B8B8B8;
+          display: inline-block;
+          cursor: pointer; 
+          padding: 7px 20px; 
+          line-height: 28px;
+           }
+
+
+      /* Style the label to display next to the inputs */
+      label {
+        padding: 12px 12px 12px 0;
+        display: inline-block;
+      }
+
+    </style>
+    <title>File Upload</title>
+  </head>
+    <body>
+    <div class="main" style="text-align: center" >
+      <div class="x">
+        <h1>Network Discovery</h1>
+        <form method="POST" action="" enctype="multipart/form-data">
+          <p><input type="file" name="file" align="center"></p>
+          <p><input type="submit" value="Submit" align="center"></p>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

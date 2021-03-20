@@ -1,0 +1,21 @@
+Some steps to enter in terminal
+
+$ cd Project
+
+Create the environment
+$ python3 -m venv venv 
+
+Activate the environment
+$ . venv/bin/activate
+
+
+Install Flask
+$ pip install Flask
+
+It must be told where to find your application in order to use it. The FLASK_APP environment variable is used to specify how to load the application.
+$ set FLASK_APP=app.py
+$ flask run
+
+
+Then open in webbrowser in http://127.0.0.1:5000/ to run this web application. 
+
